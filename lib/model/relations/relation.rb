@@ -142,7 +142,7 @@ class Relation
   end
 
   def params_string(params)
-    params.keys.map.with_index { |key, idx| "#{table_name}.#{key} = ?#{idx}" }.join(" AND ")
+    params.keys.map.with_index { |key, idx| "#{table_name}.#{key} = $#{idx}" }.join(" AND ")
   end
 
   def select_string(*params)
