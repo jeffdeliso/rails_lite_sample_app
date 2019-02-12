@@ -1,11 +1,9 @@
-CREATE TABLE albums (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  band_id INTEGER NOT NULL,
-  year INTEGER NOT NULL,
-  live BOOLEAN NOT NULL DEFAULT false,
 
-  -- FOREIGN KEY(band_id) REFERENCES bands (id)
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password_digest VARCHAR(255),
+  session_token VARCHAR(255)
 );
 
 CREATE TABLE bands (
@@ -13,14 +11,25 @@ CREATE TABLE bands (
   name VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE albums (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  band_id INTEGER NOT NULL,
+  year INTEGER NOT NULL,
+  live BOOLEAN NOT NULL DEFAULT false,
+
+  FOREIGN KEY(band_id) REFERENCES bands (id)
+);
+
+
 CREATE TABLE notes (
   id SERIAL PRIMARY KEY,
   content TEXT NOT NULL,
   track_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
 
-  -- FOREIGN KEY(track_id) REFERENCES tracks (id),
-  -- FOREIGN KEY(user_id) REFERENCES users (id)
+  FOREIGN KEY(track_id) REFERENCES tracks (id),
+  FOREIGN KEY(user_id) REFERENCES users (id)
 );
 
 CREATE TABLE tracks (
@@ -31,14 +40,7 @@ CREATE TABLE tracks (
   bonus BOOLEAN NOT NULL DEFAULT false,
   lyrics TEXT NOT NULL,
 
-  -- FOREIGN KEY(album_id) REFERENCES albums (id)
-);
-
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(255) NOT NULL,
-  password_digest VARCHAR(255),
-  session_token VARCHAR(255)
+  FOREIGN KEY(album_id) REFERENCES albums (id)
 );
 
 
