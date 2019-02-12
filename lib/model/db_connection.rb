@@ -19,7 +19,7 @@ class DBConnection
     commands = [
       "dropdb '#{DB_FILE}'",
       "createdb '#{DB_FILE}'",
-      "psql  '#{DB_FILE}' <  '#{SQL_FILE}'"
+      "psql '#{DB_FILE}' < '#{SQL_FILE}'"
     ]
 
     commands.each { |command| `#{command}` }
