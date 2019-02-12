@@ -9,7 +9,7 @@ DB_FILE = ENV['DATABASE_URL']
 
 class DBConnection
   def self.open(db_file_name)
-    @db = PG::Connection.new(db_file_name)
+    @db ||= PG::Connection.new(db_file_name)
     # @db.results_as_hash = false
     # @db.type_translation = true
 
@@ -19,7 +19,7 @@ class DBConnection
   def self.reset
     commands = [
       "dropdb '#{DB_FILE}'",
-      
+      "createdb '#{DB_FILE}'",
       "psql '#{DB_FILE}' < '#{SQL_FILE}'"
     ]
 
@@ -28,7 +28,7 @@ class DBConnection
   end
 
   def self.instance
-    reset if @db.nil?
+    # reset if @db.nil?
     @db ||= DBConnection.open(DB_FILE)
 
     @db
