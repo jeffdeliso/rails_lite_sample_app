@@ -17,7 +17,7 @@ class ModelBase
       Select 
         * 
       FROM 
-        '#{self.table_name}' 
+        #{self.table_name}
       LIMIT 0
     SQL
     .first.map!(&:to_sym)
