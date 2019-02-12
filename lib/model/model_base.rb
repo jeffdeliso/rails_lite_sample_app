@@ -188,6 +188,6 @@ class ModelBase
   end
   
   def update_string
-    attributes.keys.map.with_index { |attr, idx| "#{attr} = id = $#{idx + 1}" }.join(", ")
+    attributes.keys.map.with_index { |attr, idx| "#{attr} = $#{idx + 1}" }.join(", ")
   end
 end
