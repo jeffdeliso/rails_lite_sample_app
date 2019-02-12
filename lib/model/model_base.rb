@@ -76,7 +76,7 @@ class ModelBase
   end
 
   def self.find(id)
-    results = DBConnection.execute(<<-SQL, id)
+    results = DBConnection.execute(<<-SQL, [id])
       Select 
         * 
       FROM 
@@ -140,7 +140,7 @@ class ModelBase
   end
   
   def destroy
-    DBConnection.execute(<<-SQL, id)
+    DBConnection.execute(<<-SQL, [id])
       DELETE
       FROM
         #{self.class.table_name}
