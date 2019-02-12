@@ -161,8 +161,8 @@ class ModelBase
       RETURNING
         id
     SQL
-    self.id = id
-    # self.id = DBConnection.execute("SELECT MAX(id) FROM #{self.class.table_name}").first.first
+    # self.id = id
+    self.id = DBConnection.execute("SELECT MAX(id) FROM #{self.class.table_name}").first.first
   end
   
   def update_database
