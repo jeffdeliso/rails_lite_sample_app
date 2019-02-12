@@ -134,7 +134,7 @@ class ModelBase
   end
   
   def destroy
-    DBConnection.instance.exec(<<-SQL, id)
+    DBConnection.execute(<<-SQL, id)
       DELETE
       FROM
         #{self.class.table_name}
