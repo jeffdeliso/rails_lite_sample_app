@@ -20,6 +20,5 @@ end
 
 app = Rack::Builder.new do
   use Static
-  # use ShowExceptions
   run app
 end.to_app
