@@ -64,7 +64,7 @@ module Associatable
         ON
           #{through_table}.#{source_fk} = #{source_table}.#{source_pk}
         WHERE
-          #{through_table}.#{through_pk} = ?
+          #{through_table}.#{through_pk} = $1
       SQL
 
       source_options.model_class.parse_all(results).first
@@ -110,7 +110,7 @@ module Associatable
         ON
           #{self.class.table_name}.#{self_through_id} = #{through_table}.#{through_self_id}
         WHERE
-          #{self.class.table_name}.id = ?
+          #{self.class.table_name}.id = $1
       SQL
 
       source_options.model_class.parse_all(results)

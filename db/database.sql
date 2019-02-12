@@ -5,7 +5,7 @@ CREATE TABLE albums (
   year INTEGER NOT NULL,
   live BOOLEAN NOT NULL DEFAULT false,
 
-  FOREIGN KEY(band_id) REFERENCES bands (id)
+  -- FOREIGN KEY(band_id) REFERENCES bands (id)
 );
 
 CREATE TABLE bands (
@@ -19,8 +19,8 @@ CREATE TABLE notes (
   track_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
 
-  FOREIGN KEY(track_id) REFERENCES tracks (id),
-  FOREIGN KEY(user_id) REFERENCES users (id)
+  -- FOREIGN KEY(track_id) REFERENCES tracks (id),
+  -- FOREIGN KEY(user_id) REFERENCES users (id)
 );
 
 CREATE TABLE tracks (
@@ -31,7 +31,7 @@ CREATE TABLE tracks (
   bonus BOOLEAN NOT NULL DEFAULT false,
   lyrics TEXT NOT NULL,
 
-  FOREIGN KEY(album_id) REFERENCES albums (id)
+  -- FOREIGN KEY(album_id) REFERENCES albums (id)
 );
 
 CREATE TABLE users (
