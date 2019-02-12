@@ -32,7 +32,7 @@ class DBConnection
   end
 
   def self.instance
-    reset if @db.nil?
+    # reset if @db.nil?
     @db ||= DBConnection.open(DB_FILE)
 
     @db
