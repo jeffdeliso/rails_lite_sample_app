@@ -59,14 +59,20 @@ class ModelBase
   end
 
   def self.parse_all(results)
-    results.map do |arr|
-      params = {}
-      columns.each_with_index do |column, idx|
-        params[column] = arr[idx]
-      end
+    # results.map do |arr|
+    #   params = {}
+    #   columns.each_with_index do |column, idx|
+    #     params[column] = arr[idx]
+    #   end
 
-      self.new(params)
+    #   self.new(params)
+    instances = []
+
+    results.each do |result|
+      instances << self.new(result)
     end
+
+    instances
   end
 
   def self.find(id)
