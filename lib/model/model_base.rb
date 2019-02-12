@@ -59,13 +59,6 @@ class ModelBase
   end
 
   def self.parse_all(results)
-    # results.map do |arr|
-    #   params = {}
-    #   columns.each_with_index do |column, idx|
-    #     params[column] = arr[idx]
-    #   end
-
-    #   self.new(params)
     instances = []
 
     results.each do |result|
@@ -161,7 +154,7 @@ class ModelBase
       RETURNING
         id
     SQL
-    # self.id = id
+    
     self.id = id.first['id']
   end
   
@@ -180,7 +173,6 @@ class ModelBase
   
   def question_marks
     attributes.map.with_index { |_, idx| "$#{idx + 1}"}.join(", ")
-    # (["?"] * attributes.count).join(", ")
   end
   
   def column_names 

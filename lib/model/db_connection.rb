@@ -3,15 +3,11 @@ require 'pg'
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 ROOT_FOLDER = File.join(File.dirname(__FILE__), '..', '..')
 SQL_FILE = File.join(ROOT_FOLDER, 'db', 'database.sql')
-# DB_FILE = gFile.join(ROOT_FOLDER, 'db', 'database.db')
-# DB_FILE = ENV['DATABASE_URL']
 DB_FILE = ENV['DATABASE_URL']
 
 class DBConnection
   def self.open(db_file_name)
     @db ||= PG::Connection.new(db_file_name)
-    # @db.results_as_hash = false
-    # @db.type_translation = true
 
     @db
   end
@@ -22,10 +18,6 @@ class DBConnection
       "createdb '#{DB_FILE}'",
       "psql '#{DB_FILE}' < '#{SQL_FILE}'"
     ]
-    # commands = [
-    #   "rm '#{DB_FILE}'",
-    #   "cat '#{SQL_FILE}' | sqlite3 '#{DB_FILE}'"
-    # ]
 
     commands.each { |command| `#{command}` }
     DBConnection.open(DB_FILE)
@@ -55,7 +47,7 @@ class DBConnection
   private
 
   def self.print_query(query, *interpolation_args)
-    # return unless PRINT_QUERIES
+    return unless PRINT_QUERIES
 
     puts '--------------------'
     puts query
