@@ -47,6 +47,10 @@ class BandsController < ApplicationController
     redirect_to bands_url
   end
 
+  def json
+    @bands = Band.all
+  end
+
   private
   
   def band_params

@@ -8,6 +8,9 @@ def create_routes(router)
     resources :users, only: [:show, :new, :create]
 
     resources :bands do
+      collection do
+        get :json
+      end
       resources :albums, only: [:new]
     end
 
