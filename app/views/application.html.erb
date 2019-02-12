@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/public/main.css" />
+  </head>
+
+  <body>
+    <div class='main-content'>
+      <h1 class='main-logo'>Music App</h1>
+
+      <% if logged_in? %>
+        <nav>
+          <a class='button' href="<%= bands_url %>">Take me Home</a>
+          
+          <div class='user-detail'>
+            <p>Logged in as: <%= current_user.username %></p>
+          <form action=<%= sessions_url %> method='post'>
+            <input
+              type="hidden"
+              name="_method"
+              value="delete">
+            <input
+              type="hidden"
+              name="authenticity_token"
+              value="<%= form_authenticity_token %>">
+            <input 
+              type="submit" value="Sign Out">
+          </form>
+          </div>
+        </nav>
+      <% end %>
+
+      <% if flash[:errors] %>
+        <p><%= flash[:errors].join(", ") %></p>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>
