@@ -128,7 +128,7 @@ class Relation
         #{table_name}
       #{join_line}
       #{where_line.blank? ? "" : "WHERE"}
-        #{where_line}
+        #{where_line};
     SQL
 
     result
@@ -142,7 +142,7 @@ class Relation
   end
 
   def params_string(params)
-    params.keys.map { |key| "#{table_name}.#{key} = ?" }.join(" AND ")
+    params.keys.map.with_index { |key, idx| "#{table_name}.#{key} = ?#{idx}" }.join(" AND ")
   end
 
   def select_string(*params)
