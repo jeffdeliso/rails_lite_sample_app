@@ -1,5 +1,5 @@
 CREATE TABLE albums (
-  id serial PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   band_id INTEGER NOT NULL,
   year INTEGER NOT NULL,
@@ -9,12 +9,12 @@ CREATE TABLE albums (
 );
 
 CREATE TABLE bands (
-  id serial PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE notes (
-  id serial PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   content TEXT NOT NULL,
   track_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE notes (
 );
 
 CREATE TABLE tracks (
-  id serial PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   album_id INTEGER NOT NULL,
   ord INTEGER NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE tracks (
 );
 
 CREATE TABLE users (
-  id serial PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
   password_digest VARCHAR(255),
   session_token VARCHAR(255)
