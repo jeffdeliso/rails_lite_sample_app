@@ -20,7 +20,7 @@ class ModelBase
         #{self.table_name}
       LIMIT 0
     SQL
-    .first.map!(&:to_sym)
+    .table.fields.map!(&:to_sym)
   end
 
   def self.finalize!
