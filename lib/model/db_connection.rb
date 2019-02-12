@@ -19,7 +19,7 @@ class DBConnection
   def self.reset
     commands = [
       "dropdb '#{DB_FILE}'",
-      "createdb '#{DB_FILE}'",
+      
       "psql '#{DB_FILE}' < '#{SQL_FILE}'"
     ]
 
@@ -28,7 +28,7 @@ class DBConnection
   end
 
   def self.instance
-    reset if @db.nil?
+    # reset if @db.nil?
     DBConnection.open(DB_FILE)
 
     @db
