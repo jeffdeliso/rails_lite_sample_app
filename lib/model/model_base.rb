@@ -174,7 +174,7 @@ class ModelBase
       SET
         #{update_string}
       WHERE
-        id = $#{arr.length + 1}
+        id = $#{arr.length}
     SQL
   end
   
