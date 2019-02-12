@@ -128,7 +128,7 @@ class Relation
         #{table_name}
       #{join_line}
       #{where_line.blank? ? "" : "WHERE"}
-        #{where_line};
+        #{where_line}
     SQL
 
     result
