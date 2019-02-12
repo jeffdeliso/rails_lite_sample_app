@@ -22,3 +22,5 @@ app = Rack::Builder.new do
   use Static
   run app
 end.to_app
+
+run app
