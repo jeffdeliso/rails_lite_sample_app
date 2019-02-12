@@ -1,4 +1,5 @@
 require 'pg'
+require 'sqlite3'
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 ROOT_FOLDER = File.join(File.dirname(__FILE__), '..', '..')
@@ -22,6 +23,10 @@ class DBConnection
       "createdb '#{DB_FILE}'",
       "psql '#{DB_FILE}' < '#{SQL_FILE}'"
     ]
+    # commands = [
+    #   "rm '#{DB_FILE}'",
+    #   "cat '#{SQL_FILE}' | sqlite3 '#{DB_FILE}'"
+    # ]
 
     commands.each { |command| `#{command}` }
     DBConnection.open(DB_FILE)
