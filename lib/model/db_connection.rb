@@ -1,23 +1,25 @@
-require 'sqlite3'
+require 'pg'
 
 PRINT_QUERIES = ENV['PRINT_QUERIES'] == 'true'
 ROOT_FOLDER = File.join(File.dirname(__FILE__), '..', '..')
 SQL_FILE = File.join(ROOT_FOLDER, 'db', 'database.sql')
-DB_FILE = File.join(ROOT_FOLDER, 'db', 'database.db')
+# DB_FILE = File.join(ROOT_FOLDER, 'db', 'database.db')
+DB_FILE = ENV['DATABASE_URL']
 
 class DBConnection
   def self.open(db_file_name)
-    @db = SQLite3::Database.new(db_file_name)
-    @db.results_as_hash = false
-    @db.type_translation = true
+    @db = PG::Connection.new(db_file_name)
+    # @db.results_as_hash = false
+    # @db.type_translation = true
 
     @db
   end
 
   def self.reset
     commands = [
-      "rm '#{DB_FILE}'",
-      "cat '#{SQL_FILE}' | sqlite3 '#{DB_FILE}'"
+      "dropdb '#{DB_FILE}'",
+      "createdb '#{DB_FILE}'",
+      "psql  '#{DB_FILE}' <  '#{SQL_FILE}'"
     ]
 
     commands.each { |command| `#{command}` }
@@ -25,7 +27,7 @@ class DBConnection
   end
 
   def self.instance
-    # reset if @db.nil?
+    reset if @db.nil?
     DBConnection.open(DB_FILE)
 
     @db
