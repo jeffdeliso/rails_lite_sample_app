@@ -76,7 +76,7 @@ class ModelBase
       FROM 
         #{table_name}
       WHERE 
-        id = ?
+        id = $#{1}
     SQL
 
     parse_all(results).first
@@ -139,7 +139,7 @@ class ModelBase
       FROM
         #{self.class.table_name}
       WHERE
-        id = ?
+        id = $#{1}
     SQL
   end
 
@@ -165,12 +165,13 @@ class ModelBase
       SET
         #{update_string}
       WHERE
-        id = ?
+        id = $#{1}
     SQL
   end
   
   def question_marks
-    (["?"] * attributes.count).join(", ")
+    attributes.map.with_index { |_, idx| "$#{idx + 1}"}.join(", ")
+    # (["?"] * attributes.count).join(", ")
   end
   
   def column_names 
@@ -178,6 +179,6 @@ class ModelBase
   end
   
   def update_string
-    attributes.keys.map { |attr| "#{attr} = ?" }.join(", ")
+    attributes.keys.map.with_index { |attr, idx| "#{attr} = id = $#{idx + 1}" }.join(", ")
   end
 end
