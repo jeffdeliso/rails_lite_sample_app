@@ -147,19 +147,20 @@ class ModelBase
   
   def insert
     raise "#{self} already in database" if self.id
-    db_connection = DBConnection.instance
-    db_connection.exec(<<-SQL, *attribute_values)
+    id = DBConnection.execute(<<-SQL, attribute_values)
       INSERT INTO
         #{self.class.table_name} (#{column_names})
       VALUES
         (#{question_marks})
+      RETURNING
+        id
     SQL
-    self.id = db_connection.last_insert_row_id
+    self.id = id
     # self.id = DBConnection.execute("SELECT MAX(id) FROM #{self.class.table_name}").first.first
   end
   
   def update_database
-    DBConnection.instance.exec(<<-SQL, *attribute_values, id)
+    DBConnection.execute(<<-SQL, *attribute_values, id)
       UPDATE
         #{self.class.table_name}
       SET
