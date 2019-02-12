@@ -162,7 +162,7 @@ class ModelBase
         id
     SQL
     # self.id = id
-    self.id = id.first.id
+    self.id = id.first['id']
   end
   
   def update_database
