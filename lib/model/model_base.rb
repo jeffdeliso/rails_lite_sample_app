@@ -166,13 +166,15 @@ class ModelBase
   end
   
   def update_database
-    DBConnection.execute(<<-SQL, *attribute_values, id)
+    arr = attribute_values
+    arr << id
+    DBConnection.execute(<<-SQL, arr)
       UPDATE
         #{self.class.table_name}
       SET
         #{update_string}
       WHERE
-        id = $#{1}
+        id = $#{arr.length + 1}
     SQL
   end
   
