@@ -134,7 +134,7 @@ class ModelBase
   end
   
   def destroy
-    DBConnection.instance.execute(<<-SQL, id)
+    DBConnection.instance.exec(<<-SQL, id)
       DELETE
       FROM
         #{self.class.table_name}
@@ -148,7 +148,7 @@ class ModelBase
   def insert
     raise "#{self} already in database" if self.id
     db_connection = DBConnection.instance
-    db_connection.execute(<<-SQL, *attribute_values)
+    db_connection.exec(<<-SQL, *attribute_values)
       INSERT INTO
         #{self.class.table_name} (#{column_names})
       VALUES
@@ -159,7 +159,7 @@ class ModelBase
   end
   
   def update_database
-    DBConnection.instance.execute(<<-SQL, *attribute_values, id)
+    DBConnection.instance.exec(<<-SQL, *attribute_values, id)
       UPDATE
         #{self.class.table_name}
       SET
