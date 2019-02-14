@@ -22,16 +22,6 @@ CREATE TABLE albums (
 );
 
 
-CREATE TABLE notes (
-  id SERIAL PRIMARY KEY,
-  content TEXT NOT NULL,
-  track_id INTEGER NOT NULL,
-  user_id INTEGER NOT NULL,
-
-  FOREIGN KEY(track_id) REFERENCES tracks (id) ON DELETE CASCADE,
-  FOREIGN KEY(user_id) REFERENCES users (id) ON DELETE CASCADE
-);
-
 CREATE TABLE tracks (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -41,6 +31,16 @@ CREATE TABLE tracks (
   lyrics TEXT NOT NULL,
 
   FOREIGN KEY(album_id) REFERENCES albums (id) ON DELETE CASCADE
+);
+
+CREATE TABLE notes (
+  id SERIAL PRIMARY KEY,
+  content TEXT NOT NULL,
+  track_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+
+  FOREIGN KEY(track_id) REFERENCES tracks (id) ON DELETE CASCADE,
+  FOREIGN KEY(user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 
